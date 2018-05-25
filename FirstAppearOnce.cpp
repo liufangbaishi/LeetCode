@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
-// 用一个数组记录每个字符出现的次数
+// 用一个数组记录每个字符出现的次数，遍历原数组，看其字符出现了几次
 int FirstAppearOnce(string str)
 {
 	string::iterator it = str.begin();
