@@ -18,14 +18,11 @@ int FirstAppearOnce(string str)
 }
 int main()
 {
-	string s;
-	while (cin >> s)
-	{
-		char c = FirstOnce(s);
-		if (c == -1)
-			cout << "-1" << endl;
-		else
-			cout << c << endl;
-	}
+	string s = "asdfasdfdb";
+	char c = FirstOnce(s);
+	if (c == -1)
+		cout << "-1" << endl;
+	else
+		cout << c << endl;
 	return 0;
 }
