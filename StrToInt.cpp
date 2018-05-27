@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 // 数字字符串转整数，如果是数字中有其他字符，返回0
+bool STATE = false;
 int StrToInt(string str)
 {
 	string::iterator it = str.begin();
@@ -12,10 +13,14 @@ int StrToInt(string str)
 	if (*it == '\0' || str.empty())
 		return 0;
 	while (*it == ' ')
+	{
 		it++;
+		if (*it == '\0')
+			return 0;
+	}
 	if (*it == '+')
 		it++;
-	if (*it == '-')
+	else if (*it == '-')
 	{
 		it++;
 		flag = -1;
@@ -27,16 +32,22 @@ int StrToInt(string str)
 			ret = ret * 10 + (*it - '0')*flag;
 			it++;
 			if (ret > INT_MAX || ret < INT_MIN)
-				return 0;
+				return 0;//这里可能不一样
 		}
 		else
 			return 0;
 	}
+	STATE = true;// 正确返回
 	return (int)ret;
 }
 void test()
 {
 	string s1 = "     -1   a23";
 	int ret = StrToInt(s1);
-	cout << ret << endl;
+	if (STATE)
+		cout << ret << endl;
+}
+int main()
+{
+	test();
 }
