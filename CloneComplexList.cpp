@@ -1,4 +1,4 @@
-// 复杂链表的复制
+// 复杂链表的拷贝
 #include <iostream>
 #include <vector>
 using namespace std;
