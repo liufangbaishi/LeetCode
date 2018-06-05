@@ -1,4 +1,4 @@
-//从尾到头打印链表
+// 浠庡熬鍒板ご鎵撳嵃閾捐〃
 #include <iostream>
 #include <vector>
 using namespace std;
