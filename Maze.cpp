@@ -10,6 +10,7 @@ struct mazePoint
 	int _x;
 	int _y;
 };
+
 class Maze
 {
 public:
