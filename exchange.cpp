@@ -57,3 +57,37 @@ int main()
 	}
 	return 0;
 }
+
+//////////////////////////////////////////////
+//另一种思路
+#include <iostream>
+#include <string>
+using namespace std;
+string Exchange(int m, int n)
+{
+    string res = "";
+    bool flag = false;
+    string table = "0123456789ABCDEF";
+    while(m)
+    {
+        if(m < 0)
+        {
+            m = -m;
+            flag = true;
+        }
+        res = table[m%n] + res;  // 这样写就不用转换字符串顺序了
+        m /= n;
+    }
+    if(flag)
+        res = '-' + res;
+    return res;
+}
+int main()
+{
+    int m, n;
+    while(cin >> m >> n)
+    {
+        cout << Exchange(m, n) << endl;
+    }
+    return 0;
+}
