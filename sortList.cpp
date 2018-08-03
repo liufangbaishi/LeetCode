@@ -16,7 +16,8 @@ ListNode* findMid(ListNode* head)// 找中间结点
 	ListNode* fast = head;
 	ListNode* slow = head;
 	ListNode* pre = NULL; 
-	while (fast && fast->next)// 这里一定要返回pre，即：如果结点个数是偶数，返回中间两个的前一个，否则就会造成死循环
+	while (fast && fast->next)// 这里一定要返回pre，即：如果结点个数是偶数，返回中间两个的前一个
+	// 否则如果当前链表有两个结点，就会造成死循环，只有返回前一个，才能将两个结点分离成两个子链表
 	{
 		pre = slow;
 		fast = fast->next->next;
