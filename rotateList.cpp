@@ -7,7 +7,7 @@ struct ListNode
 		: val(x), next(NULL) 
 	{}
 };
-ListNode *rotateRight(ListNode *head, int k) 
+ListNode *rotateRight(ListNode *head, int k)  
 {
 	if (head == NULL || head->next == NULL)
 		return head;
@@ -24,7 +24,7 @@ ListNode *rotateRight(ListNode *head, int k)
 	ListNode* cur = head;
 	ListNode* pre = head;
 	int num = count - k;
-	while (num--)
+	while (num--) // 移动count-k次，下一个结点就是旋转后的头结点
 	{
 		pre = cur;
 		cur = cur->next;
@@ -35,6 +35,37 @@ ListNode *rotateRight(ListNode *head, int k)
 		cur = cur->next;
 	cur->next = head;
 	return pHead;
+}
+
+
+// 右旋转链表   快慢指针法，与删除倒数第k个结点的题类似
+ListNode* rotateRight(ListNode* head, int k)
+{
+	if (head == NULL || head->next == NULL || k == 0)
+		return head;
+	int size = 0;
+	ListNode* cur = head;
+	while (cur)
+	{
+		size++;
+		cur = cur->next;
+	}
+	k %= size;
+	ListNode* fast = head;
+	ListNode* slow = head;
+	while (k--)
+		fast = fast->next;
+	if (fast == NULL)
+		return head;
+	while (fast->next)
+	{
+		fast = fast->next;
+		slow = slow->next;
+	}
+	fast->next = head;
+	fast = slow->next;
+	slow->next = NULL;
+	return fast;
 }
 
 // 测试
