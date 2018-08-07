@@ -18,7 +18,7 @@ struct TreeNode
 		: val(x), left(NULL), right(NULL) 
 	{}
 };
-// convert sorted list to binary search tree
+// 第一种写法
 TreeNode* Convert(ListNode* head, ListNode* tail)
 {
 	if (head == tail)
