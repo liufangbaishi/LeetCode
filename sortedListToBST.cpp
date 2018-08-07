@@ -47,6 +47,35 @@ TreeNode *sortedListToBST(ListNode *head)
 	return root;
 }
 
+// 有序链表转换成 搜索二叉树   另一种写法
+TreeNode* buildTree(ListNode* &list, int left, int right)
+{
+	if (left > right)
+		return NULL;
+
+	int mid = (left + right)/2;
+	TreeNode* pleft = buildTree(list, left, mid - 1);
+	TreeNode* root = new TreeNode(list->val);
+	list = list->next;
+	TreeNode* pright = buildTree(list, mid + 1, right);
+	root->left = pleft;
+	root->right = pright;
+	return root;
+}
+TreeNode *sortedListToBST(ListNode *head) {
+	int size = 0;
+	ListNode* cur = head;
+	while (cur)
+	{
+		size++;
+		cur = cur->next;
+	}
+	cur = head;
+	return buildTree(cur, 1, size);
+}
+
+
+//////////////////////////////测试/////////////////////////////
 void PushFront(ListNode* &head, int x)
 {
 	if (head == NULL)
