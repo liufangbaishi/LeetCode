@@ -35,7 +35,39 @@ ListNode *removeNthFromEnd(ListNode *head, int n)
 	del = NULL;
 	return head;
 }
-
+// 删除倒数第n个结点
+ListNode* removeNthFromEnd(ListNode* head, int n)
+{
+	if (head == NULL || n == 0)
+		return NULL;
+	ListNode* cur = head;
+	int size = 0;
+	while (cur)
+	{
+		size++;
+		cur = cur->next;
+	}
+	cur = head;
+	int num = size - n;
+	if (num == 0)
+	{
+		head = head->next;
+		delete cur;
+		cur = NULL;
+		return head;
+	}
+	ListNode* pre = NULL;
+	while (num--)
+	{
+		pre = cur;
+		cur = cur->next;
+	}
+	if (pre) //只有一个结点，且删除最后一个结点
+		pre->next = cur->next;
+	delete cur;
+	cur = NULL;
+	return head;
+}
 void PushFront(ListNode** p, int x)
 {
 	ListNode* node = new ListNode(x);
