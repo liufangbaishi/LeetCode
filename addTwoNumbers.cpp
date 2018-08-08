@@ -12,6 +12,7 @@ struct ListNode
 		next(NULL) 
 	{}
 };
+// 改变原链表的值
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) 
 {
 	if (l1 == NULL || l2 == NULL)
@@ -40,6 +41,30 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
 		head->next = new ListNode(value2);
 	return tmp->next;
 }
+// 创建一个新的链表返回
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        if (l1 == NULL || l2 == NULL)
+            return NULL;
+        int index = 0;
+        ListNode* head = new ListNode(-1);
+        ListNode* cur = head;
+        while(l1 || l2)
+        {
+            int n1 = l1 ? l1->val : 0;
+            int n2 = l2 ? l2->val : 0;
+            int tmp = n1+n2+index;
+            index = tmp / 10;
+            cur->next = new ListNode(tmp % 10);
+            cur = cur->next;
+            if(l1)
+                l1 = l1->next;
+            if(l2)
+                l2 = l2->next;
+        }
+        if(index != 0)
+            cur->next = new ListNode(index);
+        return head->next;
+    }
 
 void PushFront(ListNode** p, int x)
 {
