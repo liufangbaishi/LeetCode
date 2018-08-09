@@ -303,7 +303,7 @@ void test()
 	Power(2, -3);
 }
 #endif
-
+#if 0
 /////////////////////////////判断一个二叉树是不是另一个树的子树////////////////////////////////////////////
 struct TreeNode
 {
@@ -353,4 +353,53 @@ int main()
 	bool res = HasSubtree(pRoot1, pRoot2);
 	cout << res << endl;
 	//test();
+}
+
+#endif
+
+// 顺时针打印矩阵
+void print(vector<vector<int> > matrix, int cols, int rows, int start, vector<int> &res, int &index)
+{
+	int endx = cols - 1 - start;
+	int endy = rows - 1 - start;
+	for (int i = start; i <= endx; i++)
+		res[index++] = matrix[start][i];
+	if (start < endy)
+	{
+		for (int i = start + 1; i <= endy; i++)
+			res[index++] = matrix[i][endx];
+	}
+	if (start < endx && start < endy)
+	{
+		for (int i = endx - 1; i >= start; i--)
+			res[index++] = matrix[endy][i];
+	}
+	if (start < endx && start < endy - 1)
+	{
+		for (int i = endy - 1; i > start; i--)
+			res[index++] = matrix[i][start];
+	}
+}
+vector<int> printMatrix(vector<vector<int> > matrix)
+{
+	vector<int> res;
+	if (matrix.empty())
+		return res;
+	int rows = matrix.size();
+	int cols = matrix[0].size();
+	int start = 0;
+	int index = 0;
+	res.resize(rows*cols);
+	while (rows > start * 2 && cols > start * 2)
+	{
+		print(matrix, cols, rows, start, res, index);
+		++start;
+	}
+	return res;
+}
+
+int main()
+{
+	vector<vector<int>> v{ { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 } };
+	vector<int> res = printMatrix(v);
 }
