@@ -403,3 +403,39 @@ int main()
 	vector<vector<int>> v{ { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 } };
 	vector<int> res = printMatrix(v);
 }
+
+//////////////////////////////////判断一个数组是不是二叉搜索树后序遍历的结果////////////////
+//先取最后一个元素，然后从前往后判断，先开始是小于root，大于则break；再后面应该是大于root，小于则return false
+//在递归判断
+    bool Verify(vector<int> sequence, int size)
+    {
+        int root = sequence[size-1];
+        int i=0;
+        for(; i<size-1; i++)
+        {
+            if(sequence[i] > root)
+                break;
+        }
+        int j = i;
+        for(; j<size-1; j++)
+        {
+            if(sequence[j] < root)
+                return false;
+        }
+        bool left = true;
+        if(i > 0)
+            left = Verify(sequence, i);
+        bool right = true;
+        if(i < size-1)
+        {
+            vector<int> tmp(sequence.begin()+i, sequence.end());
+            right = Verify(tmp, size-1-i);
+        }
+        return left && right;
+    }
+    bool VerifySquenceOfBST(vector<int> sequence) {
+        if(sequence.empty())
+            return false;
+        int size = sequence.size();
+        return Verify(sequence, size);
+    }
