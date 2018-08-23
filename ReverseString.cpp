@@ -33,6 +33,40 @@ void ReverseString(char* str, int size)
 	}
 }
 
+// using string 
+void Reverse(string &s, int start, int end)
+{
+	while (start < end)
+	{
+		swap(s[start], s[end]);
+		start++;
+		end--;
+	}
+}
+string ReverseSentence(string str) {
+	if (str.empty())
+		return str;
+	Reverse(str, 0, str.size() - 1);
+	int start = 0;
+	int end = 0;
+	while (end <= str.size())
+	{
+		if (str[end] == ' ' || (end == str.size() && str[end - 1] != ' '))
+		{
+			Reverse(str, start, end - 1);
+			start = end + 1;
+		}
+		end++;
+	}
+	return str;
+}
+
+int main()
+{
+	string s = "I am a student.";
+	string res = ReverseSentence(s);
+	cout << res << endl;
+}
 int main()
 {
 	//char str[] = "I like Beijing.";
